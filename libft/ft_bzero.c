@@ -6,7 +6,7 @@
 /*   By: ngalvez- <ngalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:27:31 by ngalvez-          #+#    #+#             */
-/*   Updated: 2023/09/12 10:36:14 by ngalvez-         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:13:49 by ngalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,5 @@
 void	*ft_bzero(void *str, size_t n)
 {
 	ft_memset(str, 0, n);
+	return (str);
 }
