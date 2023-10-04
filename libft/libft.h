@@ -6,7 +6,7 @@
 /*   By: ngalvez- <ngalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 09:12:01 by ngalvez-          #+#    #+#             */
-/*   Updated: 2023/09/25 12:13:44 by ngalvez-         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:33:02 by ngalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ char	*ft_strdup(char *src);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_itoa(int n);
+
+char	**ft_split(char const *s, char c);
 
 void	*ft_memset(void *str, int c, size_t n);
 void	*ft_bzero(void *str, size_t n);
