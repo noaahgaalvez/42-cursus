@@ -48,12 +48,12 @@ char	*ft_itoa(int n)
 		return (NULL);
 	if (n < 0 && (sign == -1))
 		str[0] = '-';
+	str[len] = '\0';
 	while (len > 0)
 	{
 		str[len - 1] = (n % 10) + '0';
 		n = n / 10;
 		len--;
 	}
-	str[len] = '\0';
 	return (str);
 }
