@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ngalvez- <ngalvez-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 10:33:54 by ngalvez-          #+#    #+#             */
+/*   Updated: 2023/10/06 10:34:39 by ngalvez-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 void	ft_putendl_fd(char const *s, int fd)
@@ -5,6 +17,6 @@ void	ft_putendl_fd(char const *s, int fd)
 	if (s)
 	{
 		ft_putstr_fd(s, fd);
-		ft_putchar_fd('\n');
+		ft_putchar_fd('\n', fd);
 	}
 }
