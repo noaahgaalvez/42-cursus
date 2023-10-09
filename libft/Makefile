@@ -11,7 +11,12 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 	ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 	ft_putendl_fd.c ft_putnbr_fd.c
+BNS_SRC = lstnew.c lstadd_front.c lstsize.c lstlast.c \
+	lstadd_back.c lstdelone.c lstclear.c lstiter.c \
+	lstmap.c
+
 OBJS := $(SRC:.c=.o)
+BNS_OBJS := $(BNS_SRC:.c=.o)
 
 all: $(NAME)
 
@@ -21,12 +26,19 @@ $(NAME): %.o
 %.o:
 	@$(CC) $(CFLAGS) -c $(SRC)
 
+bonus:
+	$(NAME): %.o
+	@ar rcs $(NAME) $(BNS_OBJS)
+
+%.o:
+	@$(CC) $(CFLAGS) -c $(BNS_SRC)
+
 clean:
-	@$(CLEAN) $(OBJS)
+	@$(CLEAN) $(OBJS) $(BNS_OBJS)
 
 fclean:
-	@$(CLEAN) $(OBJS)
-	@$(CLEAN) $(NAME)
+	@$(CLEAN) $(OBJS) $(BNS_OBJS)
+	@$(CLEAN) $(NAME) 
 
 re: fclean all
 
