@@ -1,7 +1,7 @@
 NAME = libft.a
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -I.
 CC = gcc
-CLEAN = rm -rf
+CLEAN = rm -f
 SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c \
 	ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c \
@@ -11,35 +11,27 @@ SRC = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 	ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 	ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c \
 	ft_putendl_fd.c ft_putnbr_fd.c
-BNS_SRC = lstnew.c lstadd_front.c lstsize.c lstlast.c \
-	lstadd_back.c lstdelone.c lstclear.c lstiter.c \
-	lstmap.c
+BNS_SRC = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
+	ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
+	ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 OBJS := $(SRC:.c=.o)
 BNS_OBJS := $(BNS_SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): %.o
-	@ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJS) $(BNS_OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-%.o:
-	@$(CC) $(CFLAGS) -c $(SRC)
+clean: 
+	$(CLEAN) $(OBJS) $(BNS_OBJS)
 
-bonus:
-	$(NAME): %.o
-	@ar rcs $(NAME) $(BNS_OBJS)
+fclean: clean 
+	$(CLEAN) $(NAME)
 
-%.o:
-	@$(CC) $(CFLAGS) -c $(BNS_SRC)
+re: fclean $(NAME)
 
-clean:
-	@$(CLEAN) $(OBJS) $(BNS_OBJS)
+bonus: $(OBJS) $(BNS_OBJS)
+	ar rcs $(NAME) $(OBJS) $(BNS_OBJS)
 
-fclean:
-	@$(CLEAN) $(OBJS) $(BNS_OBJS)
-	@$(CLEAN) $(NAME) 
-
-re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

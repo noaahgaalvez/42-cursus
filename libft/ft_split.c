@@ -6,7 +6,7 @@
 /*   By: ngalvez- <ngalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 11:46:06 by ngalvez-          #+#    #+#             */
-/*   Updated: 2023/10/04 10:12:31 by ngalvez-         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:46:25 by ngalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	count_substrings(char const *s, char c)
 
 	i = 0;
 	count = 1;
-	if (s[0] == c)
+	if (s[0] == c || s[0] == '\0')
 		count--;
 	while (s[i] != '\0')
 	{
@@ -30,7 +30,7 @@ int	count_substrings(char const *s, char c)
 	return (count);
 }
 
-void	allocate_substring(char **array, char const *s, char c)
+int	allocate_substring(char **array, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -48,41 +48,45 @@ void	allocate_substring(char **array, char const *s, char c)
 		if (i > start)
 		{
 			array[j] = ft_substr(s, start, i - start);
+			if (array[j] == NULL)
+				return (-1);
 			j++;
 		}
 	}
 	array[j] = NULL;
+	return (0);
 }
 
-// void	free_mem(char **array)
-// {
-// 	size_t	i;
+void	free_mem(char **array)
+{
+	size_t	i;
 
-// 	i = 0;
-// 	if (array == NULL)
-// 		return ;
-// 	while (array[i] != NULL)
-// 	{
-// 		free(array[i]);
-// 		i++;
-// 	}
-// 	free(array);
-// }
+	i = 0;
+	if (array == NULL)
+		return ;
+	while (array[i] != NULL)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 char	**ft_split(char const *s, char c)
 {
 	char	**array;
 	size_t	substr;
 
+	if (!s)
+		return (NULL);
 	substr = count_substrings(s, c);
-	array = (char **)malloc((substr + 1) * sizeof(char *));
+	array = (char **)ft_calloc((substr + 1), sizeof(char *));
 	if (!array)
 		return (NULL);
-	allocate_substring(array, s, c);
+	if (allocate_substring(array, s, c) == -1)
+	{
+		free_mem(array);
+		return (NULL);
+	}
 	return (array);
 }
-	// if (allocate_substring(array, s, c) == -1)
-	// {
-	// 	free_mem(array);
-	// 	return (NULL);
-	// }
