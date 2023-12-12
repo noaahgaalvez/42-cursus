@@ -12,3 +12,12 @@
 
 #include "get_next_line.h"
 
+char	ft_free(char **str)
+{
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	return (0);
+}
