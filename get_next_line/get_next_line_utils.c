@@ -24,22 +24,22 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strrchr(char *str, int c)
+char	*ft_strchr(char *str, int c)
 {
-	int		len;
-	char	*tmp;
+	int	i;
 
-	tmp = (char *)str;
-	len = ft_strlen(str);
-	if (*(tmp + len) == (char)c)
-		return (tmp + len);
-	while (len)
+	i = 0;
+	if (!str)
+		return (0);
+	if (c == '\0')
+		return ((char *)str + ft_strlen(str));
+	while (str[i] != '\0')
 	{
-		if (*(tmp + len) == (char)c)
-			return (tmp + len);
-		len--;
+		if (str[i] == c)
+			return ((char *)str + i);
+		i++;
 	}
-	return (NULL);
+	return (0);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -50,63 +50,22 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1)
 	{
-		s1 = malloc(sizeof(char) + 1);
-		if (!s1)
-			return (NULL);
+		s1 = (char *)malloc(1 * sizeof(char));
 		s1[0] = '\0';
 	}
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (ft_free(&s1));
-	i = -1;
-	while (s1[++i] != '\0')
-		str[i] = s1[i];
-	j = -1;
-	while (s2[++j] != '\0')
-		str[i + j] = s2[j];
-	str[i + j] = '\0';
-	ft_free(&s1);
-	return (str);
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char	*str;
-	size_t	i;
-
-	if (!s)
+	if (!s1 || !s2)
 		return (NULL);
-	if (ft_strlen(s) < start)
-	{
-		str = (char *)malloc(sizeof(char) * 1);
-		if (!str)
-			return (NULL);
-		str[0] = '\0';
-		return (str);
-	}
-	if (ft_strlen(s) - start < len)
-		len = ft_strlen(s) - start;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s[start] != '\0' && i < len && start < ft_strlen(s))
-		str[i++] = s[start++];
-	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_strdup(char *s1)
-{
-	char	*str;
-	int		i;
-
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = -1;
-	while (s1[++i] != '\0')
-		str[i] = s1[i];
-	str[i] = '\0';
+	j = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
 	return (str);
 }
